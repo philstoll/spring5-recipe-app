@@ -2,6 +2,7 @@ package guru.springframework.bootstrap;
 
 import guru.springframework.domain.Difficulty;
 import guru.springframework.domain.Ingredient;
+import guru.springframework.domain.Note;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repository.CategoryRepository;
 import guru.springframework.repository.IngredientRepository;
@@ -50,10 +51,14 @@ public class DataLoader implements CommandLineRunner {
 
         Recipe recipe = new Recipe();
 
-        recipe.setDescription("The BEST guacamole! So easy to make with ripe avocados, salt, serrano chiles, " +
+        Note note = new Note();
+        note.setRecipeNote("The BEST guacamole! So easy to make with ripe avocados, salt, serrano chiles, " +
                 "cilantro and lime. Garnish with red radishes or jicama. Serve with tortilla chips. Watch how to " +
                 "make guacamole - it's easy!");
+        note.setRecipe(recipe);
 
+        recipe.setNote(note);
+        recipe.setDescription("Perfect Guacamole!");
         recipe.setCookTime(0);
         recipe.setPrepTime(10);
         recipe.getIngredients().add(avocado);
