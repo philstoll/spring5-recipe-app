@@ -35,42 +35,27 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadData() {
-        Ingredient avocado = new Ingredient();
-        avocado.setDescription("ripe avocados");
-        avocado.setAmount(new BigDecimal(2));
 
-        Ingredient salt = new Ingredient();
-        salt.setDescription("salt");
-        salt.setAmount(new BigDecimal(.5));
-        salt.setUnitOfMeasure(this.unitOfMeasureRepository.findByDescription("Teaspoon").get());
+        Ingredient avocado = new Ingredient("ripe avocados", new BigDecimal(2), this.unitOfMeasureRepository.findByDescription("").get());
+        Ingredient salt = new Ingredient("salt", new BigDecimal(.5), this.unitOfMeasureRepository.findByDescription("Teaspoon").get());
+        Ingredient lime = new Ingredient("fresh lime juice or lemon juice", new BigDecimal(.5), this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
-        Ingredient lime = new Ingredient();
-        lime.setDescription("fresh lime juice or lemon juice");
-        lime.setAmount(new BigDecimal(.5));
-        lime.setUnitOfMeasure(this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
+        Note note = new Note("The BEST guacamole! So easy to make with ripe avocados, salt, serrano " +
+                " chiles,cilantro and lime. Garnish with red radishes or jicama. Serve with tortilla chips. " +
+                "Watch how to make guacamole - it's easy!");
 
         Recipe recipe = new Recipe();
-
-        Note note = new Note();
-        note.setRecipeNote("The BEST guacamole! So easy to make with ripe avocados, salt, serrano chiles, " +
-                "cilantro and lime. Garnish with red radishes or jicama. Serve with tortilla chips. Watch how to " +
-                "make guacamole - it's easy!");
-        note.setRecipe(recipe);
 
         recipe.setNote(note);
         recipe.setDescription("Perfect Guacamole!");
         recipe.setCookTime(0);
         recipe.setPrepTime(10);
-        recipe.getIngredients().add(avocado);
-        recipe.getIngredients().add(salt);
-        recipe.getIngredients().add(lime);
+        recipe.addIngredient(avocado)
+                .addIngredient(salt)
+                .addIngredient(lime);
         recipe.setDifficulty(Difficulty.EASY);
         recipe.setServings(8);
         recipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
-
-        avocado.setRecipe(recipe);
-        salt.setRecipe(recipe);
-        lime.setRecipe(recipe);
 
         this.recipeRepository.save(recipe);
     }

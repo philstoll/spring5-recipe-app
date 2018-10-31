@@ -17,6 +17,8 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String direction;
 
     @Lob
@@ -111,11 +113,18 @@ public class Recipe {
     }
 
     public void setNote(Note note) {
+        note.setRecipe(this);
         this.note = note;
     }
 
     public Set<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        this.getIngredients().add(ingredient);
+        ingredient.setRecipe(this);
+        return this;
     }
 
     public void setIngredients(Set<Ingredient> ingredients) {
