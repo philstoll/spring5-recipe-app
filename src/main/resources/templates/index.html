@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>My Recipes</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<h2>My Recipes!</h2>
 
+<div class="container mt-3">
 
-<div th:each="recipe : ${recipes}">
-    <h2 th:text="${recipe.description}"></h2>
-    <p th:text="${recipe.note.recipeNote}"></p>
-    <p th:text="${recipe.prepTime}"></p>
-    <p th:text="${recipe.cookTime}"></p>
+    <div class="card border-primary">
+        <div class="card-heading bg-primary">
+            <h1 class="card-title">My Recipes!</h1>
+        </div>
 
-    <ul th:each="ingredient : ${recipe.ingredients}">
-        <li th:text="${ingredient.amount + ' ' + ingredient?.unitOfMeasure?.description + ' ' + ingredient.description}"></li>
-    </ul>
+        <div class="card-body">
+            <div th:each="recipe : ${recipes}">
+                <h2 th:text="${recipe.description}"></h2>
+                <p th:text="${recipe.note.recipeNote}"></p>
+                <p th:text="${'Prep Time: ' + recipe.prepTime + ' minutes'}"></p>
+                <p th:text="${'Cook Time: ' + recipe.cookTime + ' minutes'}"></p>
+
+                <ul th:each="ingredient : ${recipe.ingredients}">
+                    <li th:text="${ingredient.amount + ' ' + ingredient?.unitOfMeasure?.description + ' ' + ingredient.description}"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

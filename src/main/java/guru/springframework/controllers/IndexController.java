@@ -1,28 +1,26 @@
 package guru.springframework.controllers;
 
-import guru.springframework.domain.Category;
-import guru.springframework.domain.UnitOfMeasure;
-import guru.springframework.repository.CategoryRepository;
-import guru.springframework.repository.RecipeRepository;
-import guru.springframework.repository.UnitOfMeasureRepository;
+import guru.springframework.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Optional;
-
+@Slf4j
 @Controller
 public class IndexController {
 
-    private RecipeRepository recipeRepository;
+    private final RecipeService recipeService;
 
-    public IndexController(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"/", ""})
     public String getIndexPage(Model model) {
-        model.addAttribute("recipes", this.recipeRepository.findAll());
+        log.info("Index page called.");
+
+        model.addAttribute("recipes", this.recipeService.getRecipes());
 
         return "index";
     }

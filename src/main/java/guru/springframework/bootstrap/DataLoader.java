@@ -8,13 +8,20 @@ import guru.springframework.repository.CategoryRepository;
 import guru.springframework.repository.IngredientRepository;
 import guru.springframework.repository.RecipeRepository;
 import guru.springframework.repository.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+@Slf4j
 @Component
-public class DataLoader implements CommandLineRunner {
+public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private CategoryRepository categoryRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
@@ -30,11 +37,13 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        loadData();
+    @Transactional
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        log.info("Loading Bootstrap Data...");
+        this.recipeRepository.saveAll(this.getRecipes());
     }
 
-    private void loadData() {
+    private List<Recipe> getRecipes() {
 
         Ingredient avocado = new Ingredient("ripe avocados", new BigDecimal(2), this.unitOfMeasureRepository.findByDescription("").get());
         Ingredient salt = new Ingredient("salt", new BigDecimal(.5), this.unitOfMeasureRepository.findByDescription("Teaspoon").get());
@@ -57,6 +66,9 @@ public class DataLoader implements CommandLineRunner {
         recipe.setServings(8);
         recipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
 
-        this.recipeRepository.save(recipe);
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(recipe);
+
+        return recipes;
     }
 }
