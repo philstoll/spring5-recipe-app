@@ -9,7 +9,8 @@ import javax.persistence.*;
 public class UnitOfMeasure {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "unit_of_measure")
+    @TableGenerator(name = "unit_of_measure", allocationSize = 1)
     private Long id;
 
     private String description;

@@ -61,6 +61,20 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.faircome</groupId>
+			<artifactId>ctreeACE</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>C:/FairCom/V11.5.0/winX64/sdk/sql.hibernate/ctreeACEDialect.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.faircom</groupId>
+			<artifactId>ctreeJDBC</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>C:/FairCom/V11.5.0/winX64/lib/sql.jdbc/ctreeJDBC.jar</systemPath>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

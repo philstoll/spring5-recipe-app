@@ -11,7 +11,8 @@ import java.util.Set;
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "recipe")
+    @TableGenerator(name = "recipe", allocationSize = 1)
     private Long id;
 
     private String description;

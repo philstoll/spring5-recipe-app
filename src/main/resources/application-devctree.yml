@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:ctree://localhost:6597/ctreeSQL
+    username: ADMIN
+    password: ADMIN
+    driver-class-name: ctree.jdbc.ctreeDriver
+  jpa:
+    database-platform: Faircom.hibernate.dialect.CtreeDialect
+    show-sql: true
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: database_create_ctree.sql

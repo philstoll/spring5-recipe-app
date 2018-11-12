@@ -12,7 +12,8 @@ import java.util.Set;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "category")
+    @TableGenerator(name = "category", allocationSize = 1)
     private Long id;
     private String description;
 

@@ -19,12 +19,12 @@ import java.util.List;
 @Slf4j
 @Component
 @Profile({"dev", "prod", "devctree"})
-public class BootstrapMySQL implements ApplicationListener<ContextRefreshedEvent> {
+public class BootstrapPersistentDatabase implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final CategoryRepository categoryRepository;
 
-    public BootstrapMySQL(UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository) {
+    public BootstrapPersistentDatabase(UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.categoryRepository = categoryRepository;
     }
