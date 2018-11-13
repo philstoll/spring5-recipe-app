@@ -22,12 +22,12 @@ public class Recipe {
     private String url;
 
     @Lob
-    private String direction;
+    private String directions;
 
     @Lob
     private Byte[] image;
     @OneToOne(cascade = CascadeType.ALL)
-    private Note note;
+    private Notes notes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
     @Enumerated(value = EnumType.ORDINAL)
@@ -39,9 +39,12 @@ public class Recipe {
         inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    public void setNote(Note note) {
-        note.setRecipe(this);
-        this.note = note;
+    public void setNotes(Notes notes) {
+        if (notes != null) {
+            notes.setRecipe(this);
+        }
+
+        this.notes = notes;
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
