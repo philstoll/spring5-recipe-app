@@ -24,17 +24,12 @@ import java.util.List;
 @Profile("default")
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private CategoryRepository categoryRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
     private RecipeRepository recipeRepository;
-    private IngredientRepository ingredientRepository;
 
-    public RecipeBootstrap(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository,
-                           RecipeRepository recipeRepository, IngredientRepository ingredientRepository) {
-        this.categoryRepository = categoryRepository;
+    public RecipeBootstrap(UnitOfMeasureRepository unitOfMeasureRepository, RecipeRepository recipeRepository) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.recipeRepository = recipeRepository;
-        this.ingredientRepository = ingredientRepository;
     }
 
     @Override

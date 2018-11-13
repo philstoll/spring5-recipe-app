@@ -2,7 +2,6 @@ package guru.springframework.bootstrap;
 
 import guru.springframework.domain.*;
 import guru.springframework.repository.CategoryRepository;
-import guru.springframework.repository.IngredientRepository;
 import guru.springframework.repository.RecipeRepository;
 import guru.springframework.repository.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +11,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 @Component
 @Profile({"dev", "prod", "devctree"})
@@ -23,24 +18,32 @@ public class BootstrapPersistentDatabase implements ApplicationListener<ContextR
 
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final CategoryRepository categoryRepository;
+    private final RecipeRepository recipeRepository;
 
-    public BootstrapPersistentDatabase(UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository) {
+    public BootstrapPersistentDatabase(UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository, RecipeRepository recipeRepository) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.categoryRepository = categoryRepository;
+        this.recipeRepository = recipeRepository;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        //if (categoryRepository.count() == 0L) {
+        if (categoryRepository.count() == 0L) {
             log.debug("Loading Categories");
             this.loadCategories();
-        //}
+        }
 
         if (unitOfMeasureRepository.count() == 0L) {
             log.debug("Loading Unit of Measures");
             this.loadUoms();
+        }
+
+        if (recipeRepository.count() == 0L) {
+            log.debug("Loading Recipes");
+            RecipeBootstrap recipeBootstrap = new RecipeBootstrap(unitOfMeasureRepository, recipeRepository);
+            recipeBootstrap.onApplicationEvent(event);
         }
     }
 
