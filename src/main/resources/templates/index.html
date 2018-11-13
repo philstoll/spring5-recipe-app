@@ -13,7 +13,10 @@
 <div class="container mt-3">
 
     <div class="card border border-primary">
-        <h3 class="card-header bg-primary">My Recipes!</h3>
+        <h3 class="card-header bg-primary text-white">
+            My Recipes!
+            <a class="btn btn-light btn-sm float-right" href="/recipe/create" role="button">Add Recipe</a>
+        </h3>
         <div class="card-body">
             <div class="table-responsive" >
                 <table class="table table-hover">
@@ -22,14 +25,22 @@
                         <th>ID</th>
                         <th>Description</th>
                         <th>View</th>
+                        <th>Update</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="recipe : ${recipes}">
                         <td th:text="${recipe.id}">123</td>
-                        <td th:text="${recipe.id}">Tasty Goodness 3</td>
+                        <td th:text="${recipe.description}">Tasty Goodness 3</td>
                         <td>
-                            <a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View</a>
+                            <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a>
+                        </td>
+                        <td>
+                            <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a>
+                        </td>
+                        <td>
+                            <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a>
                         </td>
                     </tr>
                     </tbody>

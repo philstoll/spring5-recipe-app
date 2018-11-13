@@ -2,14 +2,13 @@ package guru.springframework.bootstrap;
 
 import guru.springframework.domain.Difficulty;
 import guru.springframework.domain.Ingredient;
-import guru.springframework.domain.Note;
+import guru.springframework.domain.Notes;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repository.CategoryRepository;
 import guru.springframework.repository.IngredientRepository;
 import guru.springframework.repository.RecipeRepository;
 import guru.springframework.repository.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -51,13 +50,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Ingredient salt = new Ingredient("salt", new BigDecimal(.5), this.unitOfMeasureRepository.findByDescription("Teaspoon").get());
         Ingredient lime = new Ingredient("fresh lime juice or lemon juice", new BigDecimal(.5), this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
-        Note note = new Note("The BEST guacamole! So easy to make with ripe avocados, salt, serrano " +
+        Notes notes = new Notes("The BEST guacamole! So easy to make with ripe avocados, salt, serrano " +
                 " chiles,cilantro and lime. Garnish with red radishes or jicama. Serve with tortilla chips. " +
                 "Watch how to make guacamole - it's easy!");
 
         Recipe recipe = new Recipe();
 
-        recipe.setNote(note);
+        recipe.setNotes(notes);
         recipe.setDescription("Perfect Guacamole!");
         recipe.setCookTime(0);
         recipe.setPrepTime(10);
