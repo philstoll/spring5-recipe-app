@@ -44,8 +44,6 @@ src/main/scripts/config-ctree.sql on the database specified in the settings from
     `spring.profiles.active=ctree`
     
 
-The application can be built and run using Maven. If running the app with
-MySQL, you will need to run the SQL script found at /src/main/scripts/config-mysql
-
-After starting the application, you should be able to access it at http://localhost:8080
+The application can be built and run using Maven. After starting the application,
+you should be able to access it at: http://localhost:8080
 
