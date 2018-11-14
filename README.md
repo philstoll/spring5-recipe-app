@@ -39,9 +39,9 @@ found in pom.xml
 3) Execute the _Create Tables_ and _Add Indexes_ sections of the
 src/main/scripts/config-ctree.sql on the database specified in the settings from step 2.
 
-4) Set the Spring active profile to _ctree_ at src/main/resources/application.properties:
+4) Set the Spring active profile to _devctree_ at src/main/resources/application.properties:
 
-    `spring.profiles.active=ctree`
+    `spring.profiles.active=devctree`
     
 
 The application can be built and run using Maven. After starting the application,
